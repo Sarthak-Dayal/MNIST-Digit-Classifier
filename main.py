@@ -32,8 +32,8 @@ X_train /= 255
 X_test /= 255
 
 # One-hot encode the labels
-y_train = tf.keras.utils_to_categorical(y_train, num_classes)
-y_test = tf.keras.utils_to_categorical(y_test, num_classes)
+y_train = tf.keras.utils.to_categorical(y_train, num_classes)
+y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 
 # Build the Neural Network
 model = tf.keras.Sequential([
@@ -45,5 +45,10 @@ model = tf.keras.Sequential([
 ])
 
 # Compile and Train Model
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
 model.fit(X_train, y_train, batch_size=128, epochs=4, verbose=1, validation_data=(X_test, y_test))
+
+# Test Model
+score = model.evaluate(X_test, y_test, verbose=0)
+print("TEST SCORE:", score[0])
+print("TEST ACCURACY:", score[1])
