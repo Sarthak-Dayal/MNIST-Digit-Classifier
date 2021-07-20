@@ -52,3 +52,25 @@ model.fit(X_train, y_train, batch_size=128, epochs=4, verbose=1, validation_data
 score = model.evaluate(X_test, y_test, verbose=0)
 print("TEST SCORE:", score[0])
 print("TEST ACCURACY:", score[1])
+
+# Visualize Predictions
+predictions = np.argmax(model.predict(X_test), axis=-1)
+y_test = np.argmax(y_test, axis=-1)
+correct_indices = np.nonzero(predictions == y_test)[0]
+incorrect_indices = np.nonzero(predictions != y_test)[0]
+
+plt.figure()
+for _, correct in enumerate(correct_indices[:9]):
+    plt.subplot(3,3,i+1)
+    plt.imshow(X_test[correct].reshape(28,28), cmap="gray", interpolation="none")
+    plt.title("Predicted {}, Class {}".format(predictions[correct], y_test[correct]))
+plt.tight_layout()
+plt.show()
+
+plt.figure()
+for _, incorrect in enumerate(incorrect_indices[:9]):
+    plt.subplot(3,3,i+1)
+    plt.imshow(X_test[incorrect].reshape(28,28), cmap="gray", interpolation="none")
+    plt.title("Predicted {}, Class {}".format(predictions[incorrect], y_test[incorrect]))
+plt.tight_layout()
+plt.show()
