@@ -36,7 +36,6 @@ y_train = tf.keras.utils_to_categorical(y_train, num_classes)
 y_test = tf.keras.utils_to_categorical(y_test, num_classes)
 
 # Build the Neural Network
-
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(512, input_shape=(784,)),
     tf.keras.layers.Activation('relu'),
@@ -44,3 +43,7 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(10),
     tf.keras.layers.Activation('softmax')
 ])
+
+# Compile and Train Model
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.fit(X_train, y_train, batch_size=128, epochs=4, verbose=1, validation_data=(X_test, y_test))
