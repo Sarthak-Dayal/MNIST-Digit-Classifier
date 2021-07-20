@@ -34,3 +34,13 @@ X_test /= 255
 # One-hot encode the labels
 y_train = tf.keras.utils_to_categorical(y_train, num_classes)
 y_test = tf.keras.utils_to_categorical(y_test, num_classes)
+
+# Build the Neural Network
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(512, input_shape=(784,)),
+    tf.keras.layers.Activation('relu'),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(10),
+    tf.keras.layers.Activation('softmax')
+])
