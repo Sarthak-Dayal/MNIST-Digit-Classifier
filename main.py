@@ -60,7 +60,7 @@ correct_indices = np.nonzero(predictions == y_test)[0]
 incorrect_indices = np.nonzero(predictions != y_test)[0]
 
 plt.figure()
-for _, correct in enumerate(correct_indices[:9]):
+for i, correct in enumerate(correct_indices[:9]):
     plt.subplot(3,3,i+1)
     plt.imshow(X_test[correct].reshape(28,28), cmap="gray", interpolation="none")
     plt.title("Predicted {}, Class {}".format(predictions[correct], y_test[correct]))
@@ -68,7 +68,7 @@ plt.tight_layout()
 plt.show()
 
 plt.figure()
-for _, incorrect in enumerate(incorrect_indices[:9]):
+for i, incorrect in enumerate(incorrect_indices[:9]):
     plt.subplot(3,3,i+1)
     plt.imshow(X_test[incorrect].reshape(28,28), cmap="gray", interpolation="none")
     plt.title("Predicted {}, Class {}".format(predictions[incorrect], y_test[incorrect]))
